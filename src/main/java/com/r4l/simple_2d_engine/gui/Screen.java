@@ -17,6 +17,7 @@ import com.r4l.simple_2d_engine.util.Renderable;
 import com.r4l.simple_2d_engine.Engine;
 import com.r4l.simple_2d_engine.ecs.ECS;
 import com.r4l.simple_2d_engine.ecs.Entity;
+import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
 import com.r4l.simple_2d_engine.ecs.components.RenderComponent;
 import com.r4l.simple_2d_engine.ecs.components.TextComponent;
 import com.r4l.simple_2d_engine.event.events.EngineMouseEvent;
@@ -38,7 +39,7 @@ public class Screen extends Canvas{
 	private MouseData mouseData;
 
 	public Screen() {
-		ecs = new ECS();
+		ecs = new ECS(this);
 		scedueledTasks = new ArrayList<>();
 		mouseData = new MouseData();
 		addMouseListeners();
@@ -106,19 +107,19 @@ public class Screen extends Canvas{
 	
 
 	
-	public void onPress(Entity e) {
+	public void onPress(HitboxComponent hitbox) {
 		
 	}
 	
-	public void onRelease(Entity e) {
+	public void onRelease(HitboxComponent hitbox) {
 
 	}
 	
-	public void onHover(Entity e) {
+	public void onHover(HitboxComponent hitbox) {
 
 	}
 	
-	public void onUnHover(Entity e) {
+	public void onUnhover(HitboxComponent hitbox) {
 
 	}
 	

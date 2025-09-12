@@ -3,12 +3,22 @@ package com.r4l.simple_2d_engine.ecs;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
+import com.r4l.simple_2d_engine.gui.Screen;
+
 public class ECS {
 	
 	private List<Entity> entityList;
 	
+	private Screen screen;
+	
 	public ECS() {
 		this.entityList = new ArrayList<>();
+	}
+	
+	public ECS(Screen screen) {
+		this.entityList = new ArrayList<>();
+		setScreen(screen);
 	}
 	
 
@@ -229,6 +239,22 @@ public <T extends Entity> List<T> GetEntitiesWithAllGroups(Class<T> type, String
 		}
 		e.setECS(this);
 		entityList.add(e);
+		//Initialise hitboxes
+		if (e.hasComponent(HitboxComponent.class)) {
+			for(HitboxComponent hitbox : e.GetComponents(HitboxComponent.class)) {
+				hitbox.initialise();
+			}
+		}
+	}
+
+
+	public Screen getScreen() {
+		return screen;
+	}
+
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
 	}
 
 }

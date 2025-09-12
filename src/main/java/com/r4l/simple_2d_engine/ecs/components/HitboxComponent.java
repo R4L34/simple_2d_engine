@@ -9,7 +9,11 @@ public class HitboxComponent extends Component{
 	
 	private boolean isHovered = false;
 	
+	private boolean isEnabled = true;
+	
 	//Components
+	
+	private String posComponentName, sizeComponentName;
     
     private PositionComponent pos;
     
@@ -19,17 +23,14 @@ public class HitboxComponent extends Component{
 		super(name);
 		addDependencies();
 		setHitboxType(hitboxType);
-		pos = getEntity().GetComponent("DefaultPosition");
-		size = getEntity().GetComponent("DefaultSize");
+		posComponentName = "DefaultPosition";
+		sizeComponentName = "DefaultSize";
 	}
 	
 	public HitboxComponent(String name, String posComponentName, String sizeComponentName, HitboxType hitboxType) {
 		super(name);
 		addDependencies();
 		setHitboxType(hitboxType);
- 		
-		pos = getEntity().GetComponent(posComponentName);
-		size = getEntity().GetComponent(sizeComponentName);
 	}
 	
 	private void addDependencies() {
@@ -60,5 +61,22 @@ public class HitboxComponent extends Component{
 
 	public SizeComponent getSize() {
 		return size;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void Enable() {
+		this.isEnabled = true;
+	}
+	
+	public void Disable() {
+		this.isEnabled = true;
+	}
+	
+	public void initialise() {
+		pos = getEntity().GetComponent(posComponentName);
+		size = getEntity().GetComponent(sizeComponentName);
 	}
 }

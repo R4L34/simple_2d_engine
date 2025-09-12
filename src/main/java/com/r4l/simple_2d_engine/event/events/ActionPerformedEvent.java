@@ -3,7 +3,7 @@ package com.r4l.simple_2d_engine.event.events;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 
-import com.r4l.simple_2d_engine.ecs.Entity;
+import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
 import com.r4l.simple_2d_engine.gui.Screen;
 
 
@@ -15,9 +15,9 @@ public class ActionPerformedEvent {
     	
         private final Screen screen;
         
-        private final Entity entity;
+        private final HitboxComponent hitbox;
 
-        public Base(MouseEvent e, Screen screen, Entity entity) {
+        public Base(MouseEvent e, Screen screen, HitboxComponent hitbox) {
             super((Component) e.getSource(),
                   e.getID(),
                   e.getWhen(),
@@ -28,15 +28,15 @@ public class ActionPerformedEvent {
                   e.isPopupTrigger(),
                   e.getButton());
             this.screen = screen;
-            this.entity = entity;
+            this.hitbox = hitbox;
         }
 
         public Screen getScreen() {
             return screen;
         }
 
-		public Entity getEntity() {
-			return entity;
+		public HitboxComponent getHitbox() {
+			return hitbox;
 		}
     }
     
@@ -45,30 +45,30 @@ public class ActionPerformedEvent {
     
     @SuppressWarnings("serial")
 	public static class Pressed extends Base {
-        public Pressed(MouseEvent e, Screen screen, Entity entity) {
-            super(e, screen, entity);
+        public Pressed(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+            super(e, screen, hitbox);
         }
     }
 
     @SuppressWarnings("serial")
 	public static class Released extends Base {
-        public Released(MouseEvent e, Screen screen, Entity entity) {
-            super(e, screen, entity);
+        public Released(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+        	super(e, screen, hitbox);
         }
     }
 
 
     @SuppressWarnings("serial")
 	public static class Hovered extends Base {
-        public Hovered(MouseEvent e, Screen screen, Entity entity) {
-            super(e, screen, entity);
+        public Hovered(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+        	super(e, screen, hitbox);
         }
     }
     
     @SuppressWarnings("serial")
    	public static class Unhovered extends Base {
-           public Unhovered(MouseEvent e, Screen screen, Entity entity) {
-               super(e, screen, entity);
+           public Unhovered(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+        	   super(e, screen, hitbox);
            }
        }
     
@@ -80,30 +80,30 @@ public class ActionPerformedEvent {
         
         @SuppressWarnings("serial")
     	public static class Pressed extends Base {
-            public Pressed(MouseEvent e, Screen screen, Entity entity) {
-                super(e, screen, entity);
+            public Pressed(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+                super(e, screen, hitbox);
             }
         }
 
         @SuppressWarnings("serial")
     	public static class Released extends Base {
-            public Released(MouseEvent e, Screen screen, Entity entity) {
-                super(e, screen, entity);
+            public Released(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+                super(e, screen, hitbox);
             }
         }
 
 
         @SuppressWarnings("serial")
     	public static class Hovered extends Base {
-            public Hovered(MouseEvent e, Screen screen, Entity entity) {
-                super(e, screen, entity);
+            public Hovered(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+                super(e, screen, hitbox);
             }
         }
         
         @SuppressWarnings("serial")
        	public static class Unhovered extends Base {
-               public Unhovered(MouseEvent e, Screen screen, Entity entity) {
-                   super(e, screen, entity);
+               public Unhovered(MouseEvent e, Screen screen, HitboxComponent hitbox) {
+                   super(e, screen, hitbox);
                }
            }
         
