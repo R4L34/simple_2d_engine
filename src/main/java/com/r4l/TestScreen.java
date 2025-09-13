@@ -1,20 +1,18 @@
 package com.r4l;
 
-import java.awt.Font;
 
-import com.r4l.simple_2d_engine.ecs.Entity;
 import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
-import com.r4l.simple_2d_engine.ecs.components.PositionComponent;
 import com.r4l.simple_2d_engine.ecs.components.RenderComponent;
-import com.r4l.simple_2d_engine.ecs.components.SizeComponent;
-import com.r4l.simple_2d_engine.ecs.components.TextComponent;
 import com.r4l.simple_2d_engine.gui.Screen;
-import com.r4l.simple_2d_engine.util.HitboxType;
+import com.r4l.simple_2d_engine.gui.entities.Button;
+import com.r4l.simple_2d_engine.gui.entities.Text;
 
 @SuppressWarnings("serial")
 public class TestScreen extends Screen{
 	
-	private Entity e;
+	private Button b;
+	
+	private Text t;
 	
 	public TestScreen() {
 		super();
@@ -25,18 +23,12 @@ public class TestScreen extends Screen{
 	@Override
 	public void Init() {
 		super.Init();
-		
-		e = new Entity("Entity");
-		//
-		e.addComponent(new PositionComponent(10, 10));
-		e.addComponent(new PositionComponent("TextPos", 20, 20));
-		e.addComponent(new SizeComponent(100, 100));
-		e.addComponent(new RenderComponent("/assets/ss.png", 1));
-		e.addComponent(new TextComponent("Text", "TextPos", "Text", "Tahoma", Font.BOLD, 15, 3));
-		e.addComponent(new HitboxComponent("HB1", HitboxType.HOVER));
-		e.addComponent(new HitboxComponent("HB2", HitboxType.PRESS));
-		e.addComponent(new HitboxComponent("HB3", HitboxType.RELEASE));
-		ecs.addEntity(e);
+		b = new Button("0", "Text", 10, 10, 100, 100, "/assets/ss.png", "/assets/ss1.png", "/assets/ss2.png", 2);
+		b.GetComponent(RenderComponent.class).setOpacity(0.5f);
+		t = new Text("1", "Text", 300, 300, 7, 3);
+		t.setOpacity(0.5f);
+		ecs.addEntity(b);
+		ecs.addEntity(t);
 	}
 	
 	/*
@@ -59,12 +51,10 @@ public class TestScreen extends Screen{
 	@Override
 	public void onPress(HitboxComponent hitbox) {
 		super.onPress(hitbox);
-		hitbox.getEntity().GetComponent(RenderComponent.class).setImage("/assets/ss1.png");
 	}
 	@Override
 	public void onRelease(HitboxComponent hitbox) {
 		super.onRelease(hitbox);
-		hitbox.getEntity().GetComponent(RenderComponent.class).setImage("/assets/ss.png");
 	}
 	@Override
 	public void onHover(HitboxComponent hitbox) {

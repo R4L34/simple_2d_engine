@@ -21,6 +21,7 @@ import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
 import com.r4l.simple_2d_engine.ecs.components.RenderComponent;
 import com.r4l.simple_2d_engine.ecs.components.TextComponent;
 import com.r4l.simple_2d_engine.event.events.EngineMouseEvent;
+import com.r4l.simple_2d_engine.gui.entities.Button;
 import com.r4l.simple_2d_engine.util.Loop;
 import com.r4l.simple_2d_engine.util.Reference;
 import com.r4l.simple_2d_engine.util.Task;
@@ -72,7 +73,7 @@ public class Screen extends Canvas{
 	 */
 	public void renderUpdate(Graphics2D g2) {
 		//White Background
-		g2.setColor(Color.WHITE);
+		g2.setColor(Reference.MAIN_SCREEN_BG_COLOR);
 		g2.fillRect(0, 0, Reference.FINAL_RESOLUTION.width, Reference.FINAL_RESOLUTION.height);
 		//Rendering
 		// Collect all render components
@@ -108,19 +109,32 @@ public class Screen extends Canvas{
 
 	
 	public void onPress(HitboxComponent hitbox) {
+		Entity e = hitbox.getEntity();
+		if(hitbox.getEntity().getGroups().contains("Button")) {
+			((Button) e).onPress();
+		}
 		
 	}
 	
 	public void onRelease(HitboxComponent hitbox) {
-
+		Entity e = hitbox.getEntity();
+		if(hitbox.getEntity().getGroups().contains("Button")) {
+			((Button) e).onRelease();
+		}
 	}
 	
 	public void onHover(HitboxComponent hitbox) {
-
+		Entity e = hitbox.getEntity();
+		if(hitbox.getEntity().getGroups().contains("Button")) {
+			((Button) e).onHover();
+		}
 	}
 	
 	public void onUnhover(HitboxComponent hitbox) {
-
+		Entity e = hitbox.getEntity();
+		if(hitbox.getEntity().getGroups().contains("Button")) {
+			((Button) e).onUnhover();
+		}
 	}
 	
 	

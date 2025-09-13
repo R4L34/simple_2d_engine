@@ -122,5 +122,54 @@ public class MouseHandler {
 		        }
 		    }
 		}
+		
+		
+		//Hover / Unhover Logic also on dragEvent
+		@SubscribeEvent
+		public void onMouseDragged(EngineMouseEvent.Dragged event) {
+		    Screen screen = event.getScreen();
+		    ECS ecs = screen.getEcs();
+
+		    // --- Hover Logic (same as in onMouseMoved) ---
+		    HitboxComponent hovered = isInRange(event, HitboxType.HOVER);
+		    if (hovered != null && !hovered.isHovered()) {
+		        Engine.EVENT_BUS.post(new ActionPerformedEvent.Pre.Hovered(event, screen, hovered));
+		        screen.onHover(hovered);
+		        Engine.EVENT_BUS.post(new ActionPerformedEvent.Post.Hovered(event, screen, hovered));
+		        hovered.setHovered(true);
+		        return;
+		    }
+
+		    // --- Unhover Logic (same as in onMouseMoved) ---
+		    int mouseX = event.getX();
+		    int mouseY = event.getY();
+
+		    List<HitboxComponent> candidates = new ArrayList<>();
+		    for (Entity entity : ecs.getEntityList()) {
+		        if (!entity.hasComponent(HitboxComponent.class)) continue;
+
+		        for (HitboxComponent hb : entity.GetComponents(HitboxComponent.class)) {
+		            if (hb.getHitboxType() == HitboxType.HOVER && hb.isEnabled()) {
+		                candidates.add(hb);
+		            }
+		        }
+		    }
+
+		    for (HitboxComponent hb : candidates) {
+		        PositionComponent pos = hb.getPos();
+		        SizeComponent size = hb.getSize();
+
+		        boolean insideX = mouseX >= pos.getX() && mouseX <= pos.getX() + size.getWidth();
+		        boolean insideY = mouseY >= pos.getY() && mouseY <= pos.getY() + size.getHeight();
+
+		        if (!(insideX && insideY) && hb.isHovered()) {
+		            Engine.EVENT_BUS.post(new ActionPerformedEvent.Pre.Unhovered(event, screen, hb));
+		            screen.onUnhover(hb);
+		            Engine.EVENT_BUS.post(new ActionPerformedEvent.Post.Unhovered(event, screen, hb));
+		            hb.setHovered(false);
+		        }
+		    }
+		}
+
 
 }

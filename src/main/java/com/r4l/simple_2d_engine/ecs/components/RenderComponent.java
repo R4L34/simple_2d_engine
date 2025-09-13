@@ -1,5 +1,7 @@
 package com.r4l.simple_2d_engine.ecs.components;
 
+import java.awt.AlphaComposite;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,6 +18,8 @@ public class RenderComponent extends Component implements Renderable{
     
     private int zOrder;
     
+    private float opacity;
+    
     //Components
     
     private String posComponentName;
@@ -26,12 +30,14 @@ public class RenderComponent extends Component implements Renderable{
     
     private SizeComponent size;
     
+    
     public RenderComponent(String resourceLocation, int zOrder) {
 		super("DefaultRender");
 		addDependencies();
 		posComponentName = "DefaultPosition";
 		sizeComponentName = "DefaultSize";
 		this.resourceLocation = resourceLocation;
+		opacity = 1.0f;
 		setZOrder(zOrder);
 		loadImage();
 	}
@@ -42,6 +48,7 @@ public class RenderComponent extends Component implements Renderable{
  		this.posComponentName = posComponentName;
  		this.sizeComponentName = sizeComponentName;
  		this.resourceLocation = resourceLocation;
+ 		opacity = 1.0f;
  		setZOrder(zOrder);
  		loadImage();
  	}
@@ -90,12 +97,28 @@ public class RenderComponent extends Component implements Renderable{
 		this.zOrder = zOrder;
 	}
 	
+    public float getOpacity() {
+        return opacity;
+    }
+
+    public void setOpacity(float opacity) {
+        this.opacity = Math.max(0.0f, Math.min(1.0f, opacity));
+    }
+	
 	
 	public void render(Graphics2D g2) {
 		pos = getEntity().GetComponent(posComponentName);
 		size = getEntity().GetComponent(sizeComponentName);
         if (image == null) return;
+
+
+        Composite oldComposite = g2.getComposite();
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
         g2.drawImage(image, pos.getX(), pos.getY(), size.getWidth(), size.getHeight(), null);
+
+        // Restore old composite
+        g2.setComposite(oldComposite);
 	}
 	
 

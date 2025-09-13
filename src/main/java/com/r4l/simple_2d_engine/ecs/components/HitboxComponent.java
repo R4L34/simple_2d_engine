@@ -80,4 +80,3 @@ public class HitboxComponent extends Component{
 		size = getEntity().GetComponent(sizeComponentName);
 	}
 }
-

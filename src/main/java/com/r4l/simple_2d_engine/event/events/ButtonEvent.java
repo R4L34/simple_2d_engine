@@ -1,8 +1,8 @@
 package com.r4l.simple_2d_engine.event.events;
 
-import java.awt.Button;
 
 import com.r4l.simple_2d_engine.gui.Screen;
+import com.r4l.simple_2d_engine.gui.entities.Button;
 
 public class ButtonEvent {
 	
