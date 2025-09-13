@@ -72,7 +72,7 @@ public class HitboxComponent extends Component{
 	}
 	
 	public void Disable() {
-		this.isEnabled = true;
+		this.isEnabled = false;
 	}
 	
 	public void initialise() {
@@ -80,3 +80,4 @@ public class HitboxComponent extends Component{
 		size = getEntity().GetComponent(sizeComponentName);
 	}
 }
+
