@@ -72,36 +72,36 @@ public class Engine {
 	    }
 
 	    currentScreen = screen;
-	    Dimension size = null;
-	    if(Reference.FINAL_RESOLUTION == null) {
-	    	size = new Dimension(
-	    	        Reference.BASE_RESOLUTION.width * Reference.SCALE,
-	    	        Reference.BASE_RESOLUTION.height * Reference.SCALE
-	    	    );
-	    	    Reference.FINAL_RESOLUTION = size;
-	    }else {
-	    	size = Reference.FINAL_RESOLUTION;
+
+	    Dimension size;
+	    if (Reference.FINAL_RESOLUTION == null) {
+	        size = new Dimension(
+	            Reference.BASE_RESOLUTION.width * Reference.SCALE,
+	            Reference.BASE_RESOLUTION.height * Reference.SCALE
+	        );
+	        Reference.FINAL_RESOLUTION = size;
+	    } else {
+	        size = Reference.FINAL_RESOLUTION;
 	    }
-	    
-	    
-	    
-	    
+
 	    currentScreen.setPreferredSize(size);
+	    currentScreen.setSize(size);
 
 	    window.add(currentScreen);
-	    window.pack();
+	    window.revalidate();
+	    window.repaint();
 
 	    if (Reference.isFULLSCREEN) {
-	        // Borderless fullscreen window
 	        window.setBounds(0, 0, Reference.SCREEN_SIZE.width, Reference.SCREEN_SIZE.height);
 	        window.setVisible(true);
 
-	        // Center the scaled screen inside the window → black bars
 	        int offsetX = (Reference.SCREEN_SIZE.width - size.width) / 2;
 	        int offsetY = (Reference.SCREEN_SIZE.height - size.height) / 2;
-	        currentScreen.setBounds(offsetX, offsetY, size.width, size.height);
+	        currentScreen.setLocation(offsetX, offsetY);
 
+	        window.setLayout(null);
 	    } else {
+	        window.pack();
 	        window.setVisible(true);
 	    }
 
