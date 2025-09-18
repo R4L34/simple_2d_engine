@@ -256,5 +256,9 @@ public <T extends Entity> List<T> GetEntitiesWithAllGroups(Class<T> type, String
 	public void setScreen(Screen screen) {
 		this.screen = screen;
 	}
+	
+	public void flush() {
+		entityList = new ArrayList<>();
+	}
 
 }

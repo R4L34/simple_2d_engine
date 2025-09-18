@@ -2,17 +2,14 @@ package com.r4l;
 
 
 import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
-import com.r4l.simple_2d_engine.ecs.components.RenderComponent;
 import com.r4l.simple_2d_engine.gui.Screen;
-import com.r4l.simple_2d_engine.gui.entities.Button;
-import com.r4l.simple_2d_engine.gui.entities.Text;
 
 @SuppressWarnings("serial")
 public class TestScreen extends Screen{
 	
-	private Button b;
+	//private Button b;
 	
-	private Text t;
+	//private Text t;
 	
 	public TestScreen() {
 		super();
@@ -23,12 +20,7 @@ public class TestScreen extends Screen{
 	@Override
 	public void Init() {
 		super.Init();
-		b = new Button("0", "Text", 10, 10, 100, 100, "/assets/ss.png", "/assets/ss1.png", "/assets/ss2.png", 2);
-		b.GetComponent(RenderComponent.class).setOpacity(0.5f);
-		t = new Text("1", "Text", 300, 300, 7, 3);
-		t.setOpacity(0.5f);
-		ecs.addEntity(b);
-		ecs.addEntity(t);
+
 	}
 	
 	/*

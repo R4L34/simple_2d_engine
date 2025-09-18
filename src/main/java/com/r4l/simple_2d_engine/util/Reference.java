@@ -7,7 +7,7 @@ public class Reference {
 	
 	public static Dimension BASE_RESOLUTION = new Dimension(640, 360);
 	
-	public static int SCALE = 1;
+	public static int SCALE = 0;
 	
 	public static Dimension FINAL_RESOLUTION;
 	
@@ -15,9 +15,9 @@ public class Reference {
 	
 	public static Color MAIN_SCREEN_BG_COLOR = Color.WHITE;
 	
-	//Technical
-	
 	public static boolean isFULLSCREEN = false;
+	
+	//Technical
 	
 	public static Dimension SCREEN_SIZE;
 

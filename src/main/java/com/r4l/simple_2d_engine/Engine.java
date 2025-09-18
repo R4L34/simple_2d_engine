@@ -48,10 +48,14 @@ public class Engine {
 
 	    int scaleX = Reference.SCREEN_SIZE.width / Reference.BASE_RESOLUTION.width;
 	    int scaleY = Reference.SCREEN_SIZE.height / Reference.BASE_RESOLUTION.height;
-	    Reference.SCALE = Math.min(scaleX, scaleY);
+	    if(Reference.SCALE == 0)
+	    	Reference.SCALE = Math.min(scaleX, scaleY);
 
-	    Reference.isFULLSCREEN = true;
-	    window.setUndecorated(true);
+	    if(Reference.isFULLSCREEN) {
+	    	window.setUndecorated(true);
+	    } else {
+	    	window.setUndecorated(false);
+	    }
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setResizable(false);
 	    window.getContentPane().setBackground(Color.BLACK);
@@ -68,13 +72,20 @@ public class Engine {
 	    }
 
 	    currentScreen = screen;
-
-	    // Scaled game resolution
-	    Dimension size = new Dimension(
-	        Reference.BASE_RESOLUTION.width * Reference.SCALE,
-	        Reference.BASE_RESOLUTION.height * Reference.SCALE
-	    );
-	    Reference.FINAL_RESOLUTION = size;
+	    Dimension size = null;
+	    if(Reference.FINAL_RESOLUTION == null) {
+	    	size = new Dimension(
+	    	        Reference.BASE_RESOLUTION.width * Reference.SCALE,
+	    	        Reference.BASE_RESOLUTION.height * Reference.SCALE
+	    	    );
+	    	    Reference.FINAL_RESOLUTION = size;
+	    }else {
+	    	size = Reference.FINAL_RESOLUTION;
+	    }
+	    
+	    
+	    
+	    
 	    currentScreen.setPreferredSize(size);
 
 	    window.add(currentScreen);

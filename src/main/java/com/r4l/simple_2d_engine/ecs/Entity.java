@@ -274,6 +274,10 @@ public class Entity {
 		c.setEntity(this);
 		components.add(c);
 	}
+	
+	public void flush() {
+		components = new ArrayList<>();
+	}
 
 	public ECS getECS() {
 		return ecs;
@@ -281,6 +285,10 @@ public class Entity {
 
 	public void setECS(ECS ecs) {
 		this.ecs = ecs;
+	}
+	
+	public List<Component> getComponentList() {
+		return components;
 	}
 	
 }

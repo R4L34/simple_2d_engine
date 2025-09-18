@@ -27,24 +27,24 @@ public class TextComponent extends Component implements Renderable {
     
     private float opacity;
 
-    public TextComponent(String text, String fontName, int fontStyle, int fontSize, int zOrder) {
+    public TextComponent(String text, Font font, int zOrder) {
         super("DefaultText");
         opacity = 1.0f;
         addDependency(PositionComponent.class);
         posComponentName = "DefaultPosition";
         setText(text);
-        setFont(new Font(fontName, fontStyle, fontSize * Reference.SCALE));
+        setFont(new Font(font.getFontName(), font.getStyle(), font.getSize() * Reference.SCALE));
         setColor(Color.BLACK);
         setZOrder(zOrder);
     }
 
-    public TextComponent(String name, String posComponentName, String text, String fontName, int fontStyle, int fontSize, int zOrder) {
-        super("DefaultText");
+    public TextComponent(String name, String posComponentName, String text, Font font, int zOrder) {
+        super(name);
         opacity = 1.0f;
         this.posComponentName = posComponentName;
         addDependency(PositionComponent.class);
         setText(text);
-        setFont(new Font(fontName, fontStyle, fontSize * Reference.SCALE));
+        setFont(new Font(font.getFontName(), font.getStyle(), font.getSize() * Reference.SCALE));
         setColor(Color.BLACK);
         setZOrder(zOrder);
     }
@@ -71,6 +71,31 @@ public class TextComponent extends Component implements Renderable {
 
     public void setFont(Font font) {
         this.font = font;
+    }
+    
+    
+    public String getFontName() {
+        return font.getFontName();
+    }
+
+    public void setFontName(String fontName) {
+        font = new Font(fontName, font.getStyle(), font.getSize());
+    }
+
+    public int getFontStyle() {
+        return font.getStyle();
+    }
+
+    public void setFontStyle(int style) {
+        font = new Font(font.getFontName(), style, font.getSize());
+    }
+
+    public int getFontSize() {
+        return font.getSize() / Reference.SCALE;
+    }
+
+    public void setFontSize(int size) {
+        font = new Font(font.getFontName(), font.getStyle(), size * Reference.SCALE);
     }
 
     public Color getColor() {
