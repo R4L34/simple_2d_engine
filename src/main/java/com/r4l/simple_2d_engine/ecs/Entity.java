@@ -278,6 +278,10 @@ public class Entity {
 	public void flush() {
 		components = new ArrayList<>();
 	}
+	
+	public void flushByGroup(String group) {
+	    components.removeIf(c -> c.getGroups().contains(group));
+	}
 
 	public ECS getECS() {
 		return ecs;

@@ -1,6 +1,7 @@
 package com.r4l.simple_2d_engine.ecs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
@@ -259,6 +260,17 @@ public <T extends Entity> List<T> GetEntitiesWithAllGroups(Class<T> type, String
 	
 	public void flush() {
 		entityList = new ArrayList<>();
+	}
+	
+	public void flushByGroup(String group) {
+		Iterator<Entity> iterator = entityList.iterator();
+		while (iterator.hasNext()) {
+		    Entity e = iterator.next();
+		    if (e.getGroups().contains(group)) {
+		        iterator.remove();
+		    }
+		}
+
 	}
 
 }
