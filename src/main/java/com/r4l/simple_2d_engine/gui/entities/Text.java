@@ -8,7 +8,7 @@ import com.r4l.simple_2d_engine.ecs.components.TextComponent;
 
 public class Text extends Entity{
 	public Text(String name, String text, int x, int y, int size, int zOrder) {
-		super(name, "Sprite");
+		super(name, "Text");
 		
 		addComponent(new PositionComponent(x, y));
 		addComponent(new TextComponent(text, new Font("Tahoma", Font.BOLD, size), zOrder));

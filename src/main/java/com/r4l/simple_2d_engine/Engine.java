@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import com.r4l.simple_2d_engine.event.EventBus;
+import com.r4l.simple_2d_engine.event.listeners.KeyHandler;
 import com.r4l.simple_2d_engine.event.listeners.MouseHandler;
 import com.r4l.simple_2d_engine.gui.Screen;
 import com.r4l.simple_2d_engine.util.Reference;
@@ -39,6 +40,7 @@ public class Engine {
 	
 	private void registerEventListeners() {
 		Engine.EVENT_BUS.register(new MouseHandler());
+		Engine.EVENT_BUS.register(new KeyHandler());
 	}
 	
 	
@@ -107,6 +109,9 @@ public class Engine {
 
 	    currentScreen.onOpen();
 	    currentScreen.startUpdate();
+	    
+	    currentScreen.setFocusable(true);
+	    currentScreen.requestFocusInWindow();
 	}
 
 

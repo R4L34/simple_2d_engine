@@ -248,6 +248,11 @@ public <T extends Entity> List<T> GetEntitiesWithAllGroups(Class<T> type, String
 		}
 	}
 
+	
+	public void removeEntity(Entity e) {
+		entityList.remove(e);
+	}
+	
 
 	public Screen getScreen() {
 		return screen;
