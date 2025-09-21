@@ -1,5 +1,7 @@
 package com.r4l.simple_2d_engine.gui.entities;
 
+import java.util.List;
+
 import com.r4l.simple_2d_engine.Engine;
 import com.r4l.simple_2d_engine.ecs.Entity;
 import com.r4l.simple_2d_engine.ecs.components.HitboxComponent;
@@ -110,6 +112,30 @@ public class Button extends Entity {
     // --- RenderComponent ---
     public RenderComponent getRender() {
         return render;
+    }
+    
+    public void hide() {
+    	render.setOpacity(0f);
+    }
+    
+    public void show() {
+    	render.setOpacity(1f);
+    }
+    
+    public void DisableHitboxes() {
+    	List<HitboxComponent> hitboxes = this.GetComponents(HitboxComponent.class);
+    	
+    	for (HitboxComponent h : hitboxes) {
+    		h.Disable();
+    	}
+    }
+    
+    public void EnableHitboxes() {
+    	List<HitboxComponent> hitboxes = this.GetComponents(HitboxComponent.class);
+    	
+    	for (HitboxComponent h : hitboxes) {
+    		h.Enable();
+    	}
     }
 
 
