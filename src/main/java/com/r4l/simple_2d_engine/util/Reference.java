@@ -2,6 +2,7 @@ package com.r4l.simple_2d_engine.util;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class Reference {
 	
@@ -22,5 +23,15 @@ public class Reference {
 	public static Dimension SCREEN_SIZE;
 
 	public static final int NANOSECOND = 1_000_000_000;
+	
+	
+	public static class Text{
+		
+		public static String DEFAULT_FONT = "Tahoma"; 
+		
+		public static int DEFAULT_FONT_STYLE = Font.BOLD;
+		
+		public static Alignment DEFAULT_ALIGNMENT = Alignment.CENTER;
+	}
 
 }
