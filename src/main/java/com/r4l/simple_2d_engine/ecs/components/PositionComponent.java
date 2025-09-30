@@ -22,15 +22,23 @@ public class PositionComponent extends Component{
 	}
 
 
-	public int getX() {
+	public int getScaledX() {
 		return x;
+	}
+	
+	public int getX() {
+		return x / Reference.SCALE;
+	}
+	
+	public int getY() {
+		return y / Reference.SCALE;
 	}
 
 	public void setX(int x) {
 		this.x = x * Reference.SCALE;
 	}
 
-	public int getY() {
+	public int getScaledY() {
 		return y;
 	}
 

@@ -22,15 +22,23 @@ public class SizeComponent extends Component{
 		setHeight(height);
 	}
 
-	public int getWidth() {
+	public int getScaledWidth() {
 		return width;
+	}
+	
+	public int getWidth() {
+		return width / Reference.SCALE;
+	}
+	
+	public int getHeight() {
+		return height / Reference.SCALE;
 	}
 
 	public void setWidth(int width) {
 		this.width = width * Reference.SCALE;
 	}
 
-	public int getHeight() {
+	public int getScaledHeight() {
 		return height;
 	}
 

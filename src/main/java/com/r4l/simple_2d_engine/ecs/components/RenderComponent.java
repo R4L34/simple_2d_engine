@@ -115,7 +115,7 @@ public class RenderComponent extends Component implements Renderable{
         Composite oldComposite = g2.getComposite();
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
-        g2.drawImage(image, pos.getX(), pos.getY(), size.getWidth(), size.getHeight(), null);
+        g2.drawImage(image, pos.getScaledX(), pos.getScaledY(), size.getScaledWidth(), size.getScaledHeight(), null);
 
         // Restore old composite
         g2.setComposite(oldComposite);

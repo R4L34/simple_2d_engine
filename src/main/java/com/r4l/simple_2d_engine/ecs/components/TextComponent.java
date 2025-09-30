@@ -135,22 +135,31 @@ public class TextComponent extends Component implements Renderable {
     }
     
     
-    public int getTextWidth() {
+    public int getScaledTextWidth() {
 		return textWidth;
 	}
     
     
-    public int getTextHeight() {
+    public int getScaledTextHeight() {
 		return textHeight;
 	}
     
+    public int getTextWidth() {
+		return textWidth / Reference.SCALE;
+	}
+    
+    
+    public int getTextHeight() {
+		return textHeight / Reference.SCALE;
+	}
+    
     //Used in render methd
-    private int getWidth(Graphics2D g2) {
+    private int getScaledWidth(Graphics2D g2) {
     	textWidth = g2.getFontMetrics(font).stringWidth(text);
         return textWidth;
     }
 
-    private int getHeight(Graphics2D g2) {
+	private int getScaledHeight(Graphics2D g2) {
     	textHeight = g2.getFontMetrics(font).getHeight();
         return textHeight;
     } 
@@ -168,8 +177,8 @@ public class TextComponent extends Component implements Renderable {
         g2.setColor(color);
         ///
         
-        int x = pos.getX();
-        int y = pos.getY();
+        int x = pos.getScaledX();
+        int y = pos.getScaledY();
         
         
         switch (alignment) {
@@ -177,17 +186,17 @@ public class TextComponent extends Component implements Renderable {
         	g2.drawString(text, x, y);
             break;
         case CENTER:
-        	g2.drawString(text, x - getWidth(g2) / 2, y);
+        	g2.drawString(text, x - getScaledWidth(g2) / 2, y);
             break;
         case RIGHT:
-        	g2.drawString(text, x - getWidth(g2), y);
+        	g2.drawString(text, x - getScaledWidth(g2), y);
             break;
         
         default:
         	g2.drawString(text, x, y);
     }
         
-        getHeight(g2);
+        getScaledHeight(g2);
 
         g2.setComposite(oldComposite);
     }

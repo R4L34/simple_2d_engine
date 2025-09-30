@@ -40,8 +40,8 @@ public class MouseHandler {
 	        PositionComponent pos = hitbox.getPos();
 	        SizeComponent size = hitbox.getSize();
 
-	        if (mouseX >= pos.getX() && mouseX <= pos.getX() + size.getWidth()
-	         && mouseY >= pos.getY() && mouseY <= pos.getY() + size.getHeight()) {
+	        if (mouseX >= pos.getScaledX() && mouseX <= pos.getScaledX() + size.getScaledWidth()
+	         && mouseY >= pos.getScaledY() && mouseY <= pos.getScaledY() + size.getScaledHeight()) {
 	            return hitbox;
 	        }
 	    }
@@ -111,8 +111,8 @@ public class MouseHandler {
 		        PositionComponent pos = hb.getPos();
 		        SizeComponent size = hb.getSize();
 
-		        boolean insideX = mouseX >= pos.getX() && mouseX <= pos.getX() + size.getWidth();
-		        boolean insideY = mouseY >= pos.getY() && mouseY <= pos.getY() + size.getHeight();
+		        boolean insideX = mouseX >= pos.getScaledX() && mouseX <= pos.getScaledX() + size.getScaledWidth();
+		        boolean insideY = mouseY >= pos.getScaledY() && mouseY <= pos.getScaledY() + size.getScaledHeight();
 
 		        if (!(insideX && insideY) && hb.isHovered()) {
 		            Engine.EVENT_BUS.post(new ActionPerformedEvent.Pre.Unhovered(event, screen, hb));
@@ -159,8 +159,8 @@ public class MouseHandler {
 		        PositionComponent pos = hb.getPos();
 		        SizeComponent size = hb.getSize();
 
-		        boolean insideX = mouseX >= pos.getX() && mouseX <= pos.getX() + size.getWidth();
-		        boolean insideY = mouseY >= pos.getY() && mouseY <= pos.getY() + size.getHeight();
+		        boolean insideX = mouseX >= pos.getScaledX() && mouseX <= pos.getScaledX() + size.getScaledWidth();
+		        boolean insideY = mouseY >= pos.getScaledY() && mouseY <= pos.getScaledY() + size.getScaledHeight();
 
 		        if (!(insideX && insideY) && hb.isHovered()) {
 		            Engine.EVENT_BUS.post(new ActionPerformedEvent.Pre.Unhovered(event, screen, hb));
