@@ -18,6 +18,8 @@ public class Reference {
 	
 	public static boolean isFULLSCREEN = false;
 	
+	public static String ICON_FILEPATH = "";
+	
 	//Technical
 	
 	public static Dimension SCREEN_SIZE;
@@ -25,6 +27,8 @@ public class Reference {
 	public static final int NANOSECOND = 1_000_000_000;
 	
 	
+	
+	//Text vars
 	public static class Text{
 		
 		public static String DEFAULT_FONT = "Tahoma"; 

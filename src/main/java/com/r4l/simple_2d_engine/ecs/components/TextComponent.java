@@ -4,8 +4,10 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.IOException;
 
 import com.r4l.simple_2d_engine.ecs.Component;
 import com.r4l.simple_2d_engine.util.Alignment;
@@ -200,4 +202,18 @@ public class TextComponent extends Component implements Renderable {
 
         g2.setComposite(oldComposite);
     }
+    
+    
+    
+    public static Font loadCustomFont(String resourcePath, float size) {
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT,
+                TextComponent.class.getResourceAsStream(resourcePath));
+            return font.deriveFont(size * Reference.SCALE);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+            return new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, (int) size * Reference.SCALE);
+        }
+    }
+
 }

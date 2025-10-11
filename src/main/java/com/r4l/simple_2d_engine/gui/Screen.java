@@ -12,7 +12,6 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +28,6 @@ import com.r4l.simple_2d_engine.event.events.TickEvent;
 import com.r4l.simple_2d_engine.gui.entities.Button;
 import com.r4l.simple_2d_engine.util.Loop;
 import com.r4l.simple_2d_engine.util.Reference;
-import com.r4l.simple_2d_engine.util.Task;
 
 @SuppressWarnings("serial")
 public class Screen extends Canvas{
@@ -37,8 +35,6 @@ public class Screen extends Canvas{
 	protected ECS ecs;
 	
 	private Loop gameLoop;
-	
-	private List<Task> scedueledTasks;
 	
 	protected BufferStrategy bufferStrategy;
 	
@@ -48,7 +44,6 @@ public class Screen extends Canvas{
 
 	public Screen() {
 		ecs = new ECS(this);
-		scedueledTasks = new ArrayList<>();
 		mouseData = new MouseData();
 		keyData = new KeyData();
 		addMouseListeners();
@@ -165,7 +160,6 @@ public class Screen extends Canvas{
 			eventCaller();
 			
 			Update();
-			taskUpdate(scedueledTasks);
 
 			renderUpdate(g2);
 			
@@ -179,12 +173,6 @@ public class Screen extends Canvas{
 		});
 	}
 	
-	private void taskUpdate(List<Task> tasks) {
-		for(Task task : tasks) {
-			task.run();
-		}
-	}
-	
 	/////////////////// Getters && Setters //////////////////////
 
 	
@@ -195,28 +183,6 @@ public class Screen extends Canvas{
 
 	public Loop getGameLoop() {
 		return gameLoop;
-	}
-	
-	public void addOnUpdateTask(Task task) {
-		scedueledTasks.add(task);
-	}
-	
-	public void removeOnUpdateTask(Task task) {
-		scedueledTasks.remove(task);
-	}
-	
-	public void removeOnUpdateTaskByName(String name) {
-		Iterator<Task> iterator = scedueledTasks.iterator();
-		while (iterator.hasNext()) {
-		    Task t = iterator.next();
-		    if (t.getName().equals(name)) {
-		        iterator.remove();
-		    }
-		}
-	}
-	
-	public void flushOnUpdateTasks() {
-		scedueledTasks = new ArrayList<>();
 	}
 	
 	
