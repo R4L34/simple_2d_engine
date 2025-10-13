@@ -64,15 +64,6 @@ public class Engine {
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setResizable(false);
 	    window.getContentPane().setBackground(Color.BLACK);
-	    if(!Reference.ICON_FILEPATH.equals("")) {
-	    	 Image icon = null;
-			try {
-				icon = ImageIO.read(getClass().getResourceAsStream(Reference.ICON_FILEPATH));
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
-	    	 window.setIconImage(icon);
-	    }
 	}
 
 
@@ -125,6 +116,7 @@ public class Engine {
 	    currentScreen.setFocusable(true);
 	    currentScreen.requestFocusInWindow();
 	}
+
 
 
 
