@@ -3,8 +3,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.r4l.simple_2d_engine.event.EventBus;
@@ -46,7 +47,7 @@ public class Engine {
 	}
 	
 	
-	private void windowManager() {
+	private void windowManager(){
 	    window = new JFrame();
 	    Reference.SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -64,7 +65,12 @@ public class Engine {
 	    window.setResizable(false);
 	    window.getContentPane().setBackground(Color.BLACK);
 	    if(!Reference.ICON_FILEPATH.equals("")) {
-	    	 Image icon = new ImageIcon(Engine.class.getResource(Reference.ICON_FILEPATH)).getImage(); 
+	    	 Image icon = null;
+			try {
+				icon = ImageIO.read(getClass().getResourceAsStream(Reference.ICON_FILEPATH));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} 
 	    	 window.setIconImage(icon);
 	    }
 	}
