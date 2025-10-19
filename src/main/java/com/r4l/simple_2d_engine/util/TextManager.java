@@ -8,12 +8,12 @@ import java.util.List;
 
 public class TextManager {
 	
-	public static List<String> wrapText(String text, Font font, int maxWidth){
+	public static List<String> wrapText(String text, Font font, double maxWidth){
 		
 		List<String> lines = new ArrayList<>();
 		
 		
-		Font f = font.deriveFont(font.getSize() * Reference.SCALE);
+		Font f = font.deriveFont((float) (font.getSize() * Reference.SCALE));
 		// Create temporary graphics for width measurement
         BufferedImage tmpImg = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = tmpImg.createGraphics();
@@ -49,12 +49,12 @@ public class TextManager {
 	
 	
 	
-public static List<String> wrapText(String text, int fontSize, int maxWidth){
+public static List<String> wrapText(String text, int fontSize, double maxWidth){
 		
 		List<String> lines = new ArrayList<>();
 		
 		
-		Font f = new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, fontSize * Reference.SCALE);
+		Font f = new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, (int) (fontSize * Reference.SCALE));
 		// Create temporary graphics for width measurement
         BufferedImage tmpImg = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = tmpImg.createGraphics();

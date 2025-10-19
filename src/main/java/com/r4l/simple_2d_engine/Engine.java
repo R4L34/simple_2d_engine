@@ -1,11 +1,7 @@
 package com.r4l.simple_2d_engine;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.r4l.simple_2d_engine.event.EventBus;
@@ -64,6 +60,9 @@ public class Engine {
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setResizable(false);
 	    window.getContentPane().setBackground(Color.BLACK);
+	    if(Reference.ICON != null) {
+	    	 window.setIconImage(Reference.ICON);
+	    }
 	}
 
 
@@ -81,8 +80,8 @@ public class Engine {
 	    Dimension size;
 	    if (Reference.FINAL_RESOLUTION == null) {
 	        size = new Dimension(
-	            Reference.BASE_RESOLUTION.width * Reference.SCALE,
-	            Reference.BASE_RESOLUTION.height * Reference.SCALE
+	            (int) (Reference.BASE_RESOLUTION.width * Reference.SCALE),
+	            (int) ( Reference.BASE_RESOLUTION.height * Reference.SCALE)
 	        );
 	        Reference.FINAL_RESOLUTION = size;
 	    } else {
@@ -116,7 +115,6 @@ public class Engine {
 	    currentScreen.setFocusable(true);
 	    currentScreen.requestFocusInWindow();
 	}
-
 
 
 

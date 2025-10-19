@@ -5,44 +5,44 @@ import com.r4l.simple_2d_engine.util.Reference;
 
 public class PositionComponent extends Component{
 
-	private int x;
+	private double x;
 	
-	private int y;
+	private double y;
 	
-	public PositionComponent(int x, int y) {
+	public PositionComponent(double x, double y) {
 		super("DefaultPosition");
 		setX(x);
 		setY(y);
 	}
 	
-	public PositionComponent(String name, int x, int y) {
+	public PositionComponent(String name, double x, double y) {
 		super(name);
 		setX(x);
 		setY(y);
 	}
 
 
-	public int getScaledX() {
+	public double getScaledX() {
 		return x;
 	}
 	
-	public int getX() {
+	public double getX() {
 		return x / Reference.SCALE;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return y / Reference.SCALE;
 	}
 
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x * Reference.SCALE;
 	}
 
-	public int getScaledY() {
+	public double getScaledY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y * Reference.SCALE;
 	}
 

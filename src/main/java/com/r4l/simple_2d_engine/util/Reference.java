@@ -3,12 +3,13 @@ package com.r4l.simple_2d_engine.util;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 
 public class Reference {
 	
 	public static Dimension BASE_RESOLUTION = new Dimension(640, 360);
 	
-	public static int SCALE = 0;
+	public static double SCALE = 0;
 	
 	public static Dimension FINAL_RESOLUTION;
 	
@@ -18,7 +19,7 @@ public class Reference {
 	
 	public static boolean isFULLSCREEN = false;
 	
-	public static String ICON_FILEPATH = "";
+	public static Image ICON = null;
 	
 	//Technical
 	

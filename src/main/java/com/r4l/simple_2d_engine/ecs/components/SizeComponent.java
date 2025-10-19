@@ -6,43 +6,43 @@ import com.r4l.simple_2d_engine.util.Reference;
 
 public class SizeComponent extends Component{
 
-	private int width;
+	private double width;
 	
-	private int height;
+	private double height;
 	
-	public SizeComponent(int width, int height) {
+	public SizeComponent(double width, double height) {
 		super("DefaultSize");
 		setWidth(width);
 		setHeight(height);
 	}
 	
-	public SizeComponent(String name, int width, int height) {
+	public SizeComponent(String name, double width, double height) {
 		super(name);
 		setWidth(width);
 		setHeight(height);
 	}
 
-	public int getScaledWidth() {
+	public double getScaledWidth() {
 		return width;
 	}
 	
-	public int getWidth() {
+	public double getWidth() {
 		return width / Reference.SCALE;
 	}
 	
-	public int getHeight() {
+	public double getHeight() {
 		return height / Reference.SCALE;
 	}
 
-	public void setWidth(int width) {
+	public void setWidth(double width) {
 		this.width = width * Reference.SCALE;
 	}
 
-	public int getScaledHeight() {
+	public double getScaledHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		this.height = height * Reference.SCALE;
 	}
 

@@ -128,11 +128,11 @@ public class TextComponent extends Component implements Renderable {
         this.font = new Font(font.getFontName(), style, font.getSize()).deriveFont((float) (font.getSize() * Reference.SCALE));
     }
 
-    public int getFontSize() {
-        return (int) (font.getSize2D() / Reference.SCALE);
+    public double getFontSize() {
+        return font.getSize2D() / Reference.SCALE;
     }
 
-    public void setFontSize(int size) {
+    public void setFontSize(double size) {
         this.font = font.deriveFont((float) (size * Reference.SCALE));
     }
     
@@ -146,12 +146,12 @@ public class TextComponent extends Component implements Renderable {
 		return textHeight;
 	}
     
-    public int getTextWidth() {
+    public double getTextWidth() {
 		return textWidth / Reference.SCALE;
 	}
     
     
-    public int getTextHeight() {
+    public double getTextHeight() {
 		return textHeight / Reference.SCALE;
 	}
     
@@ -179,8 +179,8 @@ public class TextComponent extends Component implements Renderable {
         g2.setColor(color);
         ///
         
-        int x = pos.getScaledX();
-        int y = pos.getScaledY();
+        int x = (int)pos.getScaledX();
+        int y = (int) pos.getScaledY();
         
         
         switch (alignment) {
@@ -209,10 +209,10 @@ public class TextComponent extends Component implements Renderable {
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT,
                 TextComponent.class.getResourceAsStream(resourcePath));
-            return font.deriveFont(size * Reference.SCALE);
+            return font.deriveFont((float) (size * Reference.SCALE));
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-            return new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, (int) size * Reference.SCALE);
+            return new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, (int) (size * Reference.SCALE));
         }
     }
 
