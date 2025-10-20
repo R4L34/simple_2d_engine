@@ -44,19 +44,39 @@ public class Engine {
 	
 	
 	private void windowManager(){
+		if (window != null) {
+			window.dispose();
+		}
 	    window = new JFrame();
 	    Reference.SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
-	    int scaleX = Reference.SCREEN_SIZE.width / Reference.BASE_RESOLUTION.width;
-	    int scaleY = Reference.SCREEN_SIZE.height / Reference.BASE_RESOLUTION.height;
-	    if(Reference.SCALE == 0)
-	    	Reference.SCALE = Math.min(scaleX, scaleY);
+	    double scaleX = Reference.SCREEN_SIZE.width / (double) Reference.BASE_RESOLUTION.width;
+	    double scaleY = Reference.SCREEN_SIZE.height / (double) Reference.BASE_RESOLUTION.height;
+
+	    boolean screenTooSmall = scaleX < 1 || scaleY < 1;
+
+	    // If SCALE = 0, auto-scale to fit screen
+	    if (Reference.SCALE == 0) {
+	        Reference.SCALE = (int) Math.floor(Math.min(scaleX, scaleY));
+	        if (Reference.SCALE < 1) Reference.SCALE = 1; // fallback minimum
+	    }
+
+	    // Check if the scaled window exceeds the screen
+	    boolean tooWide = Reference.BASE_RESOLUTION.width * Reference.SCALE > Reference.SCREEN_SIZE.width;
+	    boolean tooTall = Reference.BASE_RESOLUTION.height * Reference.SCALE > Reference.SCREEN_SIZE.height;
+
+	    // If window doesn't fit with current custom scale
+	    if (screenTooSmall && (tooWide || tooTall)) {
+	        Reference.SCALE = Reference.DIMINISHING_SCALE;
+	    }
+
 
 	    if(Reference.isFULLSCREEN) {
 	    	window.setUndecorated(true);
 	    } else {
 	    	window.setUndecorated(false);
 	    }
+	    
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    window.setResizable(false);
 	    window.getContentPane().setBackground(Color.BLACK);
@@ -66,10 +86,9 @@ public class Engine {
 	}
 
 
-
-
 	
 	public void drawScreen(Screen screen) {
+	    
 	    if (currentScreen != null) {
 	        currentScreen.onClose();
 	        window.remove(currentScreen);
@@ -78,18 +97,18 @@ public class Engine {
 	    currentScreen = screen;
 
 	    Dimension size;
+	    size = new Dimension(
+	    	    (int) (Reference.BASE_RESOLUTION.width * Reference.SCALE),
+	    	    (int) (Reference.BASE_RESOLUTION.height * Reference.SCALE)
+	    	);
 	    if (Reference.FINAL_RESOLUTION == null) {
-	        size = new Dimension(
-	            (int) (Reference.BASE_RESOLUTION.width * Reference.SCALE),
-	            (int) ( Reference.BASE_RESOLUTION.height * Reference.SCALE)
-	        );
-	        Reference.FINAL_RESOLUTION = size;
-	    } else {
-	        size = Reference.FINAL_RESOLUTION;
+	    	Reference.FINAL_RESOLUTION = size;
 	    }
+	    	
 
-	    currentScreen.setPreferredSize(size);
-	    currentScreen.setSize(size);
+
+	    currentScreen.setPreferredSize(Reference.FINAL_RESOLUTION );
+	    currentScreen.setSize(Reference.FINAL_RESOLUTION);
 
 	    window.add(currentScreen);
 	    window.revalidate();
@@ -118,8 +137,32 @@ public class Engine {
 
 
 
+	public static void setFullscreen(boolean fullscreen) {
+	    Engine engine = getInstance();
+	    if (Reference.isFULLSCREEN == fullscreen)
+	        return;
 
+	    Reference.isFULLSCREEN = fullscreen;
 
+	    Screen screen = engine.currentScreen;
+	    engine.window.setVisible(false);
+
+	    engine.windowManager();
+
+	    if (screen != null) {
+	        engine.drawScreen(screen);
+	    }
+	}
+	
+	public static boolean setScale(double newScale) {
+		if(newScale == Reference.SCALE) {
+			return false;
+		}
+		Reference.FINAL_RESOLUTION = null;
+		Engine.getInstance().windowManager();
+		Reference.SCALE = newScale;
+		return true;
+	}
 
 
 }

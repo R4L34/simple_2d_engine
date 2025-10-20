@@ -40,6 +40,26 @@ public class Button extends Entity {
         this.rcHoverSprite = rcHoverSprite;
         this.rcPressSprite = rcPressSprite;
     }
+    
+    public Button(String name, double x, double y, double width, double height, String rcMainSprite, String rcHoverSprite, String rcPressSprite, int zOrder) {
+        super(name, "Button");
+
+        this.pos = new PositionComponent(x, y);
+        this.size = new SizeComponent(width, height);
+        this.render = new RenderComponent(rcMainSprite, zOrder);
+
+        this.addComponent(pos);
+        this.addComponent(size);
+        this.addComponent(render);
+
+        this.addComponent(new HitboxComponent("HOVER", HitboxType.HOVER));
+        this.addComponent(new HitboxComponent("PRESS", HitboxType.PRESS));
+        this.addComponent(new HitboxComponent("RELEASE", HitboxType.RELEASE));
+        
+        this.rcMainSprite = rcMainSprite;
+        this.rcHoverSprite = rcHoverSprite;
+        this.rcPressSprite = rcPressSprite;
+    }
 
     public void onClick() {
         Engine.EVENT_BUS.post(new ButtonEvent.Click(getECS().getScreen(), this));

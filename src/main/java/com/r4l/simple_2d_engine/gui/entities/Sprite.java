@@ -14,5 +14,13 @@ public class Sprite extends Entity{
 		addComponent(new SizeComponent(width, height));
 		addComponent(new RenderComponent(resourceLocation, zOrder));
 	}
+	
+	public Sprite(String name,  double x, double y, double width, double height, String resourceLocation, int zOrder) {
+		super(name, "Sprite");
+		
+		addComponent(new PositionComponent(x, y));
+		addComponent(new SizeComponent(width, height));
+		addComponent(new RenderComponent(resourceLocation, zOrder));
+	}
 
 }

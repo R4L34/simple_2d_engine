@@ -23,6 +23,20 @@ public class Text extends Entity{
 		addComponent(new TextComponent(text, new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, size), zOrder, a));
 	}
 	
+	public Text(String name, String text, double x, double y, int size, int zOrder) {
+		super(name, "Text");
+		
+		addComponent(new PositionComponent(x, y));
+		addComponent(new TextComponent(text, new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, size), zOrder, Reference.Text.DEFAULT_ALIGNMENT ));
+	}
+	
+	public Text(String name, String text, double x, double y, int size, int zOrder, Alignment a) {
+		super(name, "Text");
+		
+		addComponent(new PositionComponent(x, y));
+		addComponent(new TextComponent(text, new Font(Reference.Text.DEFAULT_FONT, Reference.Text.DEFAULT_FONT_STYLE, size), zOrder, a));
+	}
+	
 	public PositionComponent getPos() {
         return this.GetComponent(PositionComponent.class);
     }

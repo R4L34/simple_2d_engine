@@ -41,6 +41,8 @@ public class Screen extends Canvas{
 	private MouseData mouseData;
 	
 	private KeyData keyData;
+	
+	private int updateCount; //Only used to execute onPostUpdate once
 
 	public Screen() {
 		ecs = new ECS(this);
@@ -59,7 +61,7 @@ public class Screen extends Canvas{
 	}
 	
 	/*
-	 * Executes ones when the Screen is Opened;
+	 * Executes ones when the Screen is Opened but before Update;
 	 */
 	public void onOpen() {
 		
@@ -69,6 +71,13 @@ public class Screen extends Canvas{
 	 * Executes every frame, afrter onOpen();
 	 */
 	public void Update() {
+		
+	}
+	
+	/*
+	 * Executes ones when the Screen is Opened after first tick of Update;
+	 */
+	public void onOpenPost() {
 		
 	}
 	
@@ -149,6 +158,7 @@ public class Screen extends Canvas{
 	public void startUpdate() {
 		gameLoop = new Loop("ScreenLoop", () -> {
 			
+			Engine.EVENT_BUS.post(new TickEvent.Pre(this));
 
 	        if (bufferStrategy == null) {
 	            createBufferStrategy(3);
@@ -167,8 +177,17 @@ public class Screen extends Canvas{
 			
 			//Dispose and show Graphics
 			g2.dispose();
-			bufferStrategy.show();
+			try {
+				bufferStrategy.show();
+			} catch (java.lang.NullPointerException e) {
+				System.out.println("NPE Occured while executing bufferStrategy.show()");
+			}
 			Toolkit.getDefaultToolkit().sync();
+			
+			if (updateCount == 0) {
+				onOpenPost();
+				updateCount++;
+			}
 	        
 		});
 	}

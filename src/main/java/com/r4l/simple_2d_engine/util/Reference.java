@@ -11,6 +11,9 @@ public class Reference {
 	
 	public static double SCALE = 0;
 	
+	//Default Scale if screen size is too small for Base Resolution
+	public static double DIMINISHING_SCALE = 0.5;
+	
 	public static Dimension FINAL_RESOLUTION;
 	
 	public static int TICKRATE = 240;

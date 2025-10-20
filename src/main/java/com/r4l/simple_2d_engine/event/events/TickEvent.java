@@ -13,5 +13,13 @@ public class TickEvent {
 	public Screen getScreen() {
 		return screen;
 	}
+	
+	public static class Pre extends TickEvent {
+
+		public Pre(Screen screen) {
+			super(screen);
+		}
+		
+	}
 
 }
