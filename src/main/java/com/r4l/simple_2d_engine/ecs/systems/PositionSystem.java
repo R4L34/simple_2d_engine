@@ -9,7 +9,7 @@ public class PositionSystem {
 	public static void changePosition(Entity e, String name, double x, double y, MovementType type) {
 		PositionComponent pos;
 		
-		if (e.hasComponent(PositionComponent.class)) {
+		if (!e.hasComponent(PositionComponent.class)) {
 			System.out.println("Cant change position. There is no PosComponent!");
 			return;
 		}

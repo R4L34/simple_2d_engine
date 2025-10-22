@@ -31,6 +31,8 @@ public class HitboxComponent extends Component{
 		super(name);
 		addDependencies();
 		setHitboxType(hitboxType);
+		this.posComponentName = posComponentName;
+		this.sizeComponentName = sizeComponentName;
 	}
 	
 	private void addDependencies() {
